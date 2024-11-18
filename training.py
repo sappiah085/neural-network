@@ -1,14 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 from prime import forward_pass, one_hot_values, init_params, activation1, activation2, update_params, get_accuracy, get_predictions, lossFunc
 from data import saveWeight
-data = pd.read_csv('data.csv')
-data_array = np.array(data)
+from tryF import data_array, X, Y
 m, n = data_array.shape
 NEURONS_NEEDED = 50
-input = data_array[:, :4]   # The first 4 columns (features)
-Y = data_array[:, 4].reshape(m, -1)  
 
 def gradient_descent(X, Y, alpha, iterations ,m):
     Y_classes = len(np.unique(Y))
@@ -29,7 +25,7 @@ def gradient_descent(X, Y, alpha, iterations ,m):
         accuracies.append(accuracy)
     return W1, b1, W2, b2, losses, accuracies
 
-W1, b1, W2, b2, losses, accuracies = gradient_descent(input, Y, 0.005, 2000, m)
+W1, b1, W2, b2, losses, accuracies = gradient_descent(X, Y, 0.1, 1500, m)
 saveWeight(W1,b1,W2,b2)
 
 
